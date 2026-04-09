@@ -54,12 +54,17 @@
 
 ```text
 app/
-  api/
+  bootstrap/
+  presentation/http/
+  application/services/
+  domain/
+  infrastructure/
+  api/                # compatibility layer
+  services/           # compatibility layer
+  schemas/            # compatibility layer
+  models/             # compatibility layer
+  db/                 # compatibility layer
   core/
-  services/
-  models/
-  schemas/
-  db/
   utils/
 tests/
 docker-compose.yml
@@ -67,6 +72,15 @@ Dockerfile
 prometheus.yml
 requirements.txt
 ```
+
+推荐按下面的职责理解代码：
+
+- `bootstrap`: 应用组装、依赖注入、启动入口
+- `presentation/http`: FastAPI 路由和接口适配层
+- `application/services`: 编排业务流程的应用服务
+- `domain`: 订单、物流、对话、文档等领域模型与 schema
+- `infrastructure`: PostgreSQL、Redis、Milvus 等外部依赖实现
+- `api/services/schemas/models/db`: 为旧导入路径保留的兼容层
 
 ## Implemented Modules
 
